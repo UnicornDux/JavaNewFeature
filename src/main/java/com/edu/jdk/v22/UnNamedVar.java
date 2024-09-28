@@ -1,7 +1,6 @@
-package com.edu.jdk.v21;
+package com.edu.jdk.v22;
 
-// JDK 21 中引入了未命名变量
-
+// JDK 21 中引入了未命名变量, 21 中的预览特性
 import java.util.Map;
 
 public class UnNamedVar {

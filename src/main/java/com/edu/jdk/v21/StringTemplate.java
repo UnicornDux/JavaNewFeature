@@ -3,16 +3,17 @@ package com.edu.jdk.v21;
 
 import java.text.MessageFormat;
 
+
 // 字符串模板功能
 // JDK 21 中为预览功能，因此在使用的时候，添加如下的参数才能运行
 // --enable-preview --source 21
+// 由于设计问题，已经在 jdk 23 中移除，需要重新设计
 
 public class StringTemplate {
 
     public static void main(String[] args) {
         stringFormat();
         stringTemplate();
-
     }
 
     // 回顾以往的字符串格式化的写法
@@ -31,7 +32,7 @@ public class StringTemplate {
     public static void stringTemplate(){
         String name = "alex";
         Integer age = 29;
-        String v = STR."name: \{name}, with age: \{age}";
-        System.out.println(v);
+//        String v = STR."name: \{name}, with age: \{age}";
+//        System.out.println(v);
     }
 }
