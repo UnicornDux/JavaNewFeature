@@ -35,3 +35,10 @@ out/
 
 ### VS Code ###
 .vscode/
+.cache/
+CMakeFiles/
+CMakeCache.txt
+compile_commands.json
+*.so
+Makefile
+cmake_install.cmake
