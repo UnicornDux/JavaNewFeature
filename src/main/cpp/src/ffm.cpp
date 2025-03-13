@@ -8,9 +8,11 @@ void ForEach(int array[], int length, OnEach on_each) {
   }
 }
 
-int get_version() {
+int GetLangVersion() {
   // return __STDC_VERSION__;
   return 10202;
 }
 
-
+int Add(int a, int b){
+    return a + b;
+}

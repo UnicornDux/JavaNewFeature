@@ -3,6 +3,6 @@
 #include <ffm.h>
 
 int main() {
-  printf("%d", get_version());
+  printf("%d\n", GetLangVersion());
   return 0;
 }

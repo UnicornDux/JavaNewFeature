@@ -1,4 +1,8 @@
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef SIMPLENATIVELIBRARY__SIMPLE_FUNCTIONS_H_
 #define SIMPLENATIVELIBRARY__SIMPLE_FUNCTIONS_H_
 
@@ -25,7 +29,12 @@ LIBRARY_API void ForEach(int array[], int length, OnEach on_each);
 
 LIBRARY_API void DumpPerson(Person *person);
 
-LIBRARY_API int get_version();
+LIBRARY_API int GetLangVersion();
 
+LIBRARY_API int Add(int a, int b);
 
+#endif //SIMPLENATIVELIBRARY__SIMPLE_FUNCTIONS_H_
+
+#ifdef __cplusplus
+}
 #endif
