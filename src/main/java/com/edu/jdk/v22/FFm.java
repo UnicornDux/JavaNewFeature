@@ -1,10 +1,20 @@
 package com.edu.jdk.v22;
 
+import sun.misc.Unsafe;
+
 import java.lang.foreign.*;
 import java.lang.invoke.MethodHandle;
+import java.lang.reflect.Field;
 import java.util.Optional;
 
+
 /**
+ *
+ * > 基于 panama 项目演化而来，已经经历了三个大版本的迭代
+ *
+ * > ForeignFunctionMemory (FFM) 是 JDK 22 中引入的新特性
+ *
+ *
  * 这个功能主要设计用于以一种全新的方式与本地代码交互, 这样使得调用本地方法可以更加高效
  * 清晰，易用, 安全，(同时对于本地方法库以无感知的方式来编写，无须 jni 的胶水层代码)
  *
@@ -12,15 +22,18 @@ import java.util.Optional;
 public class FFm {
 
     static {
-          System.loadLibrary("ffm");
-//         System.load(System.getProperty("user.dir")+"/lib/libffm.so");
+//          System.loadLibrary("ffm");
+         String path = System.getProperty("user.dir")+"/lib/libffm.so";
+//        String path = System.getProperty("user.dir")+"/lib/libsimple.so";
+        System.out.println(path);
+        System.load(path);
     }
 
     public static void main(String[] args) {
 
         // 原始的操作 unsafe 内存的方式，现在已经被标记为删除
         // useUnsafe();
-        callLibrary();
+        // callLibrary();
 
     }
 
@@ -30,8 +43,8 @@ public class FFm {
         // 符号查找器
         SymbolLookup symbolLookup = SymbolLookup.loaderLookup();
         // Optional<MemorySegment> getVersion = SymbolLookup.libraryLookup( System.getProperty("user.dir") + "/src/main/cpp/libffm.so", Arena.ofAuto()).find("get_version");
-        Optional<MemorySegment> getVersion = symbolLookup.find("get_version");
-         if (getVersion.isPresent()) {
+        Optional<MemorySegment> getVersion = symbolLookup.find("GetLangVersion");
+        if (getVersion.isPresent()) {
             System.out.println("执行 GetVersion");
             MemorySegment getClangVersion = getVersion.get();
             MethodHandle getClangVersionHandler = linker.downcallHandle(
@@ -42,7 +55,8 @@ public class FFm {
             );
             try {
                 // 调用的时候可能会出现异常
-                getClangVersionHandler.invoke();
+                var x = (int) getClangVersionHandler.invoke();
+                System.out.println(x);
             } catch (Throwable e) {
                 throw new RuntimeException(e);
             }
@@ -55,8 +69,8 @@ public class FFm {
     }
 
 
+    /**
     // java 调用  C 语言
-    /*
     public static void callNative() {
 
         Linker linker = Linker.nativeLinker();
@@ -82,11 +96,10 @@ public class FFm {
             }
         }
     }
-    */
+     */
 
     // 原始的 unsafe 获取内存，并操作内存的方式
     // JDK 22 之后这些内容已经被标记为删除
-    /*
     public static void useUnsafe(){
 
         try {
@@ -105,6 +118,5 @@ public class FFm {
             throw new RuntimeException(e);
         }
     }
-    */
 }
 

@@ -12,8 +12,8 @@ configurations {
 }
 
 java {
-	sourceCompatibility "23"
-	targetCompatibility "23"
+	sourceCompatibility JavaVersion.VERSION_22
+	targetCompatibility JavaVersion.VERSION_22
 }
 
 
@@ -22,7 +22,25 @@ repositories {
 }
 
 dependencies {
+	testImplementation(platform("org.junit.junit-bom:5.9.1"))
+	testImplementation("org.junit.jupiter:junit-jupiter")
 }
+
+
+
+tasks.withType(JavaCompile).configureEach {
+	options.compilerArgs.addAll([
+//			"--enable-preview",
+	])
+}
+
+tasks.withType(JavaExec).configureEach {
+	jvmArgs(
+//			"--enable-preview",
+			"--enable-native-access=ALL-UNNAMED"
+	)
+}
+
 
 tasks.named('test') {
 	useJUnitPlatform()
