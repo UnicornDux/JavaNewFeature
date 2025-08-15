@@ -11,33 +11,33 @@ configurations {
 	}
 }
 
+
 java {
-	sourceCompatibility JavaVersion.VERSION_22
-	targetCompatibility JavaVersion.VERSION_22
+	sourceCompatibility JavaVersion.VERSION_21
+	targetCompatibility JavaVersion.VERSION_21
 }
 
 
 repositories {
 	mavenCentral()
+
 }
 
 dependencies {
-	testImplementation(platform("org.junit.junit-bom:5.9.1"))
+	testImplementation(platform("org.junit:junit-bom:5.9.1"))
 	testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
-
-
 tasks.withType(JavaCompile).configureEach {
 	options.compilerArgs.addAll([
-//			"--enable-preview",
+		"--enable-preview",
 	])
 }
 
 tasks.withType(JavaExec).configureEach {
 	jvmArgs(
-//			"--enable-preview",
-			"--enable-native-access=ALL-UNNAMED"
+		"--enable-preview",
+		"--enable-native-access=ALL-UNNAMED"
 	)
 }
 
