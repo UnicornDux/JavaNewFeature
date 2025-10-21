@@ -11,10 +11,8 @@ import java.util.Optional;
 /**
  *
  * > 基于 panama 项目演化而来，已经经历了三个大版本的迭代
- *
  * > ForeignFunctionMemory (FFM) 是 JDK 22 中引入的新特性
- *
- *
+ * ----
  * 这个功能主要设计用于以一种全新的方式与本地代码交互, 这样使得调用本地方法可以更加高效
  * 清晰，易用, 安全，(同时对于本地方法库以无感知的方式来编写，无须 jni 的胶水层代码)
  *
@@ -22,11 +20,8 @@ import java.util.Optional;
 public class FFm {
 
     static {
-//          System.loadLibrary("ffm");
-         String path = System.getProperty("user.dir")+"/lib/libffm.so";
-//        String path = System.getProperty("user.dir")+"/lib/libsimple.so";
-        System.out.println(path);
-        System.load(path);
+        // System.loadLibrary("ffm");
+        System.load(System.getProperty("user.dir")+"/lib/libffm.so");
     }
 
     public static void main(String[] args) {

@@ -79,7 +79,7 @@ public class VirtualThread {
                 StructuredTaskScope scope = StructuredTaskScope.open()
         ) {
            scope.fork(() -> {
-               System.out.printf("structureScope\t%s%n", Thread.currentThread());
+               System.out.printf("structureScope: %s%n", Thread.currentThread());
                return "success";
            });
 
@@ -101,6 +101,6 @@ class Task implements Runnable {
     }
     @Override
     public void run() {
-        System.out.printf("%s\t%s%n", name, Thread.currentThread());
+        System.out.printf("%s\t%s\n", this.name, Thread.currentThread());
     }
 }
