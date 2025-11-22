@@ -4,10 +4,10 @@ import java.util.concurrent.*;
 
 public class VirtualThread {
     public static void main(String[] args) {
-        useVirThreadWithName();
-        useVirThreadWithFactory();
-        useVirThreadStartDirect();
-        useVirThreadWithThreadPool();
+//        usevirthreadwithname();
+//        usevirthreadwithfactory();
+//        usevirthreadstartdirect();
+//        usevirthreadwiththreadpool();
         useVirThreadWithStructureScope();
     }
 
@@ -72,14 +72,14 @@ public class VirtualThread {
     public static void useVirThreadWithStructureScope() {
         // 返回一个 AutoClose 对象，可以自动关闭资源
         try (
-            // 结构化并发类的精髓
-            // ------------------------------------
-            // > ShutdownOnFail : 在多任务并发的情况下，有一个失败则终止所有任务
-            // > ShutdownOnSuccess : 多任务并发，有一个成功，则其他的都不再执行
-            StructuredTaskScope.ShutdownOnFailure scope = new StructuredTaskScope.ShutdownOnFailure();
+                // 结构化并发类的精髓
+                // ------------------------------------
+                // > ShutdownOnFail : 在多任务并发的情况下，有一个失败则终止所有任务
+                // > ShutdownOnSuccess : 多任务并发，有一个成功，则其他的都不再执行
+                StructuredTaskScope scope = StructuredTaskScope.open()
         ) {
            scope.fork(() -> {
-               System.out.println(STR."structureScope\t\{Thread.currentThread()}");
+               System.out.printf("structureScope\t%s%n", Thread.currentThread());
                return "success";
            });
 
@@ -101,6 +101,6 @@ class Task implements Runnable {
     }
     @Override
     public void run() {
-        System.out.println(STR."\{name}\t\{Thread.currentThread()}");
+        System.out.printf("%s\t%s%n", name, Thread.currentThread());
     }
 }

@@ -11,13 +11,11 @@ public record RecordPerson(String name, Integer age) {
         // 在 使用 instanceof 的时候解构
         if (obj instanceof RecordPerson(String name, Integer age)) {
             System.out.printf("%s, %s%n", name, age);
-            // System.out.println(STR."\{name}, \{age}");
         }
 
         // 使用 switch 的时候解构
         switch (obj) {
             case RecordPerson(String name, Integer age) -> System.out.printf("%s, %s%n", name, age);
-            // case RecordPerson(String name, Integer age) -> System.out.println(STR."\{name}, \{age}");
             case null, default -> {
                 // do nothing
             }

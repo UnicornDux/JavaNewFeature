@@ -102,6 +102,7 @@ public class FFm {
     // JDK 22 之后这些内容已经被标记为删除
     public static void useUnsafe(){
 
+        /*
         try {
             Field unSafeField = Unsafe.class.getDeclaredField("theUnsafe");
             unSafeField.setAccessible(true);
@@ -117,6 +118,7 @@ public class FFm {
         } catch (NoSuchFieldException | IllegalAccessException e){
             throw new RuntimeException(e);
         }
+        */
     }
 }
 
