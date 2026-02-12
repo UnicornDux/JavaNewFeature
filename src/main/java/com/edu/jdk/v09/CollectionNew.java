@@ -2,9 +2,8 @@ package com.edu.jdk.v09;
 
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.sql.Array;
+import java.util.*;
 
 // JDK 9.0 版本在集合里面添加的变化
 // 添加的这一组新的构建方法出来的都是不不可变集合类型
@@ -39,7 +38,17 @@ public class CollectionNew {
 
         Map<String, String> smap = Map.ofEntries(Map.entry("name", "alex"), Map.entry("kitty", "terminal"));
         log("map entry: %s",smap);
+
+
     }
+
+    // 便捷的创建不可变集合的工厂方法
+    public static void immutable() {
+
+        Collections.unmodifiableList(Arrays.asList("apple", "bnana", "cherry"));
+    }
+
+
 
     private static void log(String format, Object... args) {
        System.out.println(String.format(format, args));

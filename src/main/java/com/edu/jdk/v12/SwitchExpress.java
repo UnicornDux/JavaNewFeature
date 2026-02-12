@@ -11,7 +11,12 @@ public class SwitchExpress {
 
         var value = switch (obj) {
             case "string" -> "is String Type";
-            case "100" -> "is number";
+            case "100" -> {
+                System.out.println("string is 100");
+                // 存在多行的逻辑的时候，可以使用 yield 关键字返回，与 return 返回不同
+                // yield 只会结束当前代码块，而不像 return 结束整个函数
+                yield "is number";
+            }
             default -> null;
         };
         System.out.println(value);
