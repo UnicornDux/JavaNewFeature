@@ -54,7 +54,7 @@ public class VirtualThread {
      */
     public static void useVirThreadWithThreadPool() {
         // 因为返回了一个 AutoClose 对象，可以自动关闭资源
-        try (ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor()){
+        try (var executorService = Executors.newVirtualThreadPerTaskExecutor()){
             for (int i = 0; i < 10; i++) {
                 executorService.submit(new Task("threadPool"));
             }
@@ -65,7 +65,7 @@ public class VirtualThread {
         }
     }
 
-    /**
+    /*
      * 5. 开启虚拟线程的方式五
      *  StructureTaskScope#fork (结构化并发类)
      */

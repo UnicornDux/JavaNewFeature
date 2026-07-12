@@ -31,8 +31,7 @@ public class Main {
 
         // 自定义格式解析
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String dateString = parseDate.format(formatter);
-        String timeString = parseTime.format(formatter);
+        String dateString = parseDateTime.format(formatter);
         LocalDateTime parse = LocalDateTime.parse(dateString, formatter);
     }
 

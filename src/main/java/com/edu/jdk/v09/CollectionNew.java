@@ -14,6 +14,9 @@ public class CollectionNew {
         newListOf();
         newSetOf();
         newMapOf();
+
+    
+
     }
 
     // 新的创建 List 的方法

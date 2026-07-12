@@ -16,7 +16,7 @@ import java.util.concurrent.CompletionStage;
  */
 public class WebClient {
 
-    static void main() throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newBuilder()
                 .connectTimeout(Duration.ofSeconds(10))
                 .followRedirects(HttpClient.Redirect.NORMAL)
@@ -33,8 +33,7 @@ public class WebClient {
 
         // POST 请求
         var jsonData = """
-            {"name": "alex"}
-        """;
+{"name": "alex"}""";
         HttpRequest postRequest = HttpRequest.newBuilder()
                 .uri(URI.create("https://api.example.com/api"))
                 .header("Content-Type", "application/json")
@@ -64,7 +63,7 @@ public class WebClient {
                 if (responseInfo.statusCode() == 200) {
                     return HttpResponse.BodySubscribers.ofString(StandardCharsets.UTF_8);
                 } else {
-                    return HttpResponse.BodySubscribers.discarding();
+                    return HttpResponse.BodySubscribers.replacing(null);
                 }
             }
         });
@@ -74,13 +73,15 @@ public class WebClient {
                 .newWebSocketBuilder()
                 .buildAsync(URI.create("ws://localhost:8080/websocket"), new WebSocket.Listener() {
                     @Override
-                    public void onOpen(WebSocket webSocket) {
-                        WebSocket.Listener.super.onOpen(webSocket);
+                    public CompletionStage<?> onText(WebSocket webSocket, CharSequence data, boolean last) {
+                        System.out.println("Received: " + data);
+                        return WebSocket.Listener.super.onText(webSocket, data, last);
                     }
 
                     @Override
-                    public CompletionStage<?> onText(WebSocket webSocket, CharSequence data, boolean last) {
-                        return WebSocket.Listener.super.onText(webSocket, data, last);
+                    public void onOpen(WebSocket webSocket) {
+                        System.out.println("WebSocket opened");
+                        WebSocket.Listener.super.onOpen(webSocket);
                     }
                 }).join();
     }

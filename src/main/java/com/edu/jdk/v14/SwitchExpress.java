@@ -1,6 +1,6 @@
-package com.edu.jdk.v12;
+package com.edu.jdk.v14;
 
-// JDK 12 中 switch 语句可以有返回值，并支持辅助给变量
+// JDK 14 中 switch 语句可以有返回值，并支持辅助给变量
 public class SwitchExpress {
 
     public static void main(String[] args) {
